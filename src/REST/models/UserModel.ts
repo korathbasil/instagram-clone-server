@@ -1,4 +1,11 @@
-import { Entity, Column, BaseEntity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Entity,
+  Column,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
 
 import { hashPassword, comparePasswords } from "../helpers";
 
@@ -63,6 +70,12 @@ class User extends BaseEntity {
 
   @Column({ default: false })
   isActive: boolean;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 
   async encryptPassword() {
     const hashedPassword = await hashPassword(this.password);
