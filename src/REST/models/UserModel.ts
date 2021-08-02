@@ -1,5 +1,7 @@
 import { Entity, Column, BaseEntity, PrimaryGeneratedColumn } from "typeorm";
 
+import { hashPassword } from "../helpers";
+
 @Entity("users")
 class User extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -47,6 +49,8 @@ class User extends BaseEntity {
   @Column({
     type: "varchar",
     length: 10,
+    nullable: true,
+    enum: ["male", "female", "other"],
   })
   gender: string;
 
@@ -59,6 +63,11 @@ class User extends BaseEntity {
 
   @Column({ default: false })
   isActive: boolean;
+
+  async encryptPassword() {
+    const hashedPassword = await hashPassword(this.password);
+    this.password = hashedPassword;
+  }
 }
 
 export default User;
