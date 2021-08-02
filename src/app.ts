@@ -4,6 +4,6 @@ import { userRoute } from "./REST/routes";
 
 const app = express();
 
-app.use("/api", userRoute);
+app.use("/api/user", userRoute);
 
 export default app;
