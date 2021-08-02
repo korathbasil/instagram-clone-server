@@ -2,6 +2,8 @@ import { createConnection, Connection } from "typeorm";
 
 import { DB_PASSWORD } from "./constants";
 
+import { User } from "../REST/models";
+
 type dbConnectionCallback = (
   err: string | null,
   connection: Connection | undefined
@@ -15,7 +17,7 @@ const connectToDatabase = async (done: dbConnectionCallback) => {
     username: "postgres",
     password: DB_PASSWORD,
     database: "instagram_clone_db",
-    entities: [],
+    entities: [User],
   });
 
   if (!connection) return done("Cannot connect to the database", undefined);
