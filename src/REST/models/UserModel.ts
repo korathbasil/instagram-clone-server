@@ -23,7 +23,14 @@ class User extends BaseEntity {
     type: "varchar",
     length: 255,
   })
-  displayName: string;
+  name: string;
+
+  @Column({
+    type: "varchar",
+    length: 255,
+    unique: true,
+  })
+  username: string;
 
   @Column({
     type: "varchar",
