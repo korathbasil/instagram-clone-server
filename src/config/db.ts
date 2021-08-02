@@ -17,6 +17,7 @@ const connectToDatabase = async (done: dbConnectionCallback) => {
     username: "postgres",
     password: DB_PASSWORD,
     database: "instagram_clone_db",
+    synchronize: true,
     entities: [User],
   });
 
