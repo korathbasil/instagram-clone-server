@@ -16,4 +16,15 @@ export default {
         res.status(409).json({ success: false, err: err.message })
       );
   },
+
+  userLogin: (req: Request, res: Response) => {
+    const { email, password } = req.body;
+
+    userService
+      .loginUser(email, password)
+      .then((user) => res.status(200).json({ success: true, user: user }))
+      .catch((err) =>
+        res.status(403).json({ success: false, err: err.message })
+      );
+  },
 };

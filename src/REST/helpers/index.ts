@@ -1,3 +1,3 @@
-import { hashPassword } from "./passwordHelper";
+import { hashPassword, comparePasswords } from "./passwordHelper";
 
-export { hashPassword };
+export { hashPassword, comparePasswords };

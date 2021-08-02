@@ -1,6 +1,6 @@
 import { Entity, Column, BaseEntity, PrimaryGeneratedColumn } from "typeorm";
 
-import { hashPassword } from "../helpers";
+import { hashPassword, comparePasswords } from "../helpers";
 
 @Entity("users")
 class User extends BaseEntity {
@@ -67,6 +67,15 @@ class User extends BaseEntity {
   async encryptPassword() {
     const hashedPassword = await hashPassword(this.password);
     this.password = hashedPassword;
+  }
+
+  async isPasswordCorrect(password: string) {
+    return comparePasswords(password, this.password);
+  }
+
+  dumpUser() {
+    const { password, ...rest } = this;
+    return rest;
   }
 }
 

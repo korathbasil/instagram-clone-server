@@ -16,4 +16,16 @@ export default {
       }
     });
   },
+
+  loginUser: (email: string, password: string) => {
+    return new Promise(async (resolve, reject) => {
+      const user = await User.findOne({ email });
+      if (!user) return reject(new Error("User not found"));
+
+      const isPasswordCorrect = await user.isPasswordCorrect(password);
+      if (!isPasswordCorrect) return reject(new Error("Incorrect password"));
+
+      resolve(user.dumpUser());
+    });
+  },
 };
