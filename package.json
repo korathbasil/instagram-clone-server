@@ -6,6 +6,14 @@
   "author": "Bazil Korath",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "test": "mocha -r ts-node/register 'test/**/*.spec.ts'",
+    "watch": "tsc --watch",
+    "dev": "nodemon dist/server.js",
+    "devStart": "ts-node",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "typeorm": "^0.2.36"
