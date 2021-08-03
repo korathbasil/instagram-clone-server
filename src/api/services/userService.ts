@@ -10,7 +10,7 @@ export default {
         await user.encryptPassword();
         await user.save();
 
-        return resolve({ ...user.dumpUser(), token: user.signToken() });
+        return resolve(user.dumpUserWithToken());
       } catch (err) {
         return reject(new Error("Cannot perform action"));
       }
@@ -26,7 +26,7 @@ export default {
       const isPasswordCorrect = await user.isPasswordCorrect(password);
       if (!isPasswordCorrect) return reject(new Error("Incorrect password"));
 
-      resolve({ ...user.dumpUser(), token: user.signToken() });
+      resolve(user.dumpUserWithToken());
     });
   },
 };

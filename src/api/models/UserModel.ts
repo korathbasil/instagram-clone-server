@@ -94,14 +94,20 @@ class User extends BaseEntity {
     return comparePasswords(password, this.password);
   }
 
-  signToken() {
-    const payload = { id: this.id, name: this.name, username: this.username };
-    return jwtHelper.signToken(payload);
-  }
-
   dumpUser() {
     const { password, ...rest } = this;
     return rest;
+  }
+
+  dumpUserWithToken() {
+    const payload = { id: this.id, name: this.name, username: this.username };
+    const token = jwtHelper.signToken(payload);
+
+    const { password, ...restOfUser } = this;
+    return {
+      ...restOfUser,
+      token,
+    };
   }
 }
 
