@@ -22,7 +22,7 @@ export default {
 
     userService
       .loginUser(email, password)
-      .then((user) => res.status(200).json({ success: true, user: user }))
+      .then((user) => res.status(200).json({ success: true, user }))
       .catch((err) =>
         res.status(403).json({ success: false, err: err.message })
       );

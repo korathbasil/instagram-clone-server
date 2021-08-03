@@ -9,8 +9,7 @@ export default {
         const user = User.create(userDetails);
         await user.encryptPassword();
         await user.save();
-        const { password, ...rest } = user;
-        return resolve(rest);
+        return resolve(user.dumpUser());
       } catch (err) {
         return reject(new Error("Cannot perform action"));
       }
