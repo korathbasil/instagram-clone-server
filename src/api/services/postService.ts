@@ -1,16 +1,20 @@
-import { Post } from "../models";
+import { User, Post } from "../models";
 
 import { IPostInput } from "../interfaces";
 
 export default {
-  createPost: (postDetails: IPostInput) => {
+  createPost: (postDetails: IPostInput, user_id: number) => {
     return new Promise(async (resolve, reject) => {
+      const user = await User.findOne({ id: user_id });
+
+      if (!user) return reject(new Error("Action not allowed"));
+
       try {
-        const post = Post.create(postDetails);
+        const post = Post.create({ ...postDetails, user });
         await post.save();
-        resolve(post);
+        return resolve(post);
       } catch (err) {
-        reject(new Error("Cant add post"));
+        return reject(new Error("Cant add post"));
       }
     });
   },

@@ -8,11 +8,10 @@ export default {
     const postDetails = {
       image,
       caption,
-      user_id,
     };
 
     postService
-      .createPost(postDetails)
+      .createPost(postDetails, user_id)
       .then((post) => res.status(201).json({ success: true, post }))
       .catch((err) =>
         res.status(409).json({ success: false, err: err.message })

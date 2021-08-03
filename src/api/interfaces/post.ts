@@ -1,5 +1,7 @@
+import { User } from "../models";
+
 export interface IPostInput {
   image: string;
   caption: string;
-  user_id: number;
+  user?: User;
 }
