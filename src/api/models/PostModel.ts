@@ -5,15 +5,20 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from "typeorm";
+
+import User from "./UserModel";
 
 @Entity("posts")
 class Post extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  user_id: number;
+  @ManyToOne(() => User, (user) => user.posts)
+  @JoinColumn({ name: "user_id" })
+  user: User;
 
   @Column({
     type: "varchar",

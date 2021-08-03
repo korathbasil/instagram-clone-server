@@ -5,9 +5,12 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
 
 import { hashPassword, comparePasswords } from "../helpers";
+
+import { Post } from ".";
 
 @Entity("users")
 class User extends BaseEntity {
@@ -76,6 +79,10 @@ class User extends BaseEntity {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  // Post
+  @OneToMany(() => Post, (post) => post.user)
+  posts: Post[];
 
   async encryptPassword() {
     const hashedPassword = await hashPassword(this.password);
