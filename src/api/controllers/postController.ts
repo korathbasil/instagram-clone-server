@@ -3,6 +3,10 @@ import { Request, Response } from "express";
 import { postService } from "../services";
 
 export default {
+  getPosts: (req: Request, res: Response) => {
+    postService.getPosts(4);
+  },
+
   createPost: (req: Request, res: Response) => {
     const { image, caption, user_id } = req.body;
     const postDetails = {
