@@ -2,7 +2,7 @@ import { createConnection, Connection } from "typeorm";
 
 import { DB_PASSWORD } from "./constants";
 
-import { User } from "../REST/models";
+import { User } from "../api/models";
 
 type dbConnectionCallback = (
   err: string | null,

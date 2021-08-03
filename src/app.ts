@@ -1,6 +1,6 @@
 import express from "express";
 
-import { userRoute } from "./REST/routes";
+import { userRoute } from "./api/routes";
 
 const app = express();
 
