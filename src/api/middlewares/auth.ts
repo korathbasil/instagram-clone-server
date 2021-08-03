@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 
 import { jwtHelper } from "../helpers";
 
-import { IPayload, IRequest } from "../interfaces";
+import { IPayload } from "../interfaces";
 
 export const isAuthenticated = (
   req: Request,
@@ -14,15 +14,11 @@ export const isAuthenticated = (
   if (!token)
     return res.status(403).json({ success: false, err: "Unauthorized access" });
 
-  jwtHelper
+  return jwtHelper
     .verifyToken(token)
     .then((payload) => {
       req.user = payload as IPayload;
       return next();
     })
     .catch((err) => res.status(403).json({ success: false, err }));
-
-  //   req.user = payload as IPayload;
-
-  //   return next();
 };
