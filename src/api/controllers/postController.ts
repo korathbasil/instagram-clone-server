@@ -5,6 +5,7 @@ import { postService } from "../services";
 export default {
   getPosts: (req: Request, res: Response) => {
     const user_id = req.user.id;
+
     postService
       .getPosts(user_id)
       .then((posts) => res.status(200).json({ success: true, posts }))
@@ -14,7 +15,9 @@ export default {
   },
 
   createPost: (req: Request, res: Response) => {
-    const { image, caption, user_id } = req.body;
+    const { image, caption } = req.body;
+    const user_id = req.user.id;
+
     const postDetails = {
       image,
       caption,
