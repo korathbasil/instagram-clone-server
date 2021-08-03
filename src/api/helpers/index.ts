@@ -1,3 +1,4 @@
 import { hashPassword, comparePasswords } from "./passwordHelper";
+import jwtHelper from "./jwt";
 
-export { hashPassword, comparePasswords };
+export { hashPassword, comparePasswords, jwtHelper };

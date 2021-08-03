@@ -9,8 +9,9 @@ import {
 } from "typeorm";
 
 import { hashPassword, comparePasswords } from "../helpers";
+import { jwtHelper } from "../helpers";
 
-import { Post } from ".";
+import Post from "./PostModel";
 
 @Entity("users")
 class User extends BaseEntity {
@@ -91,6 +92,11 @@ class User extends BaseEntity {
 
   async isPasswordCorrect(password: string) {
     return comparePasswords(password, this.password);
+  }
+
+  signToken() {
+    const payload = { id: this.id, name: this.name, username: this.username };
+    return jwtHelper.signToken(payload);
   }
 
   dumpUser() {
