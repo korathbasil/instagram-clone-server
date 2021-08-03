@@ -1,9 +1,9 @@
 import { User } from "../models";
 
-import { IuserInput } from "../interfaces";
+import { IUserInput } from "../interfaces";
 
 export default {
-  createUser: (userDetails: IuserInput) => {
+  createUser: (userDetails: IUserInput) => {
     return new Promise(async (resolve, reject) => {
       try {
         const user = User.create(userDetails);

@@ -1,3 +1,4 @@
-import { IuserInput } from "./user";
+import { IUserInput } from "./user";
+import { IPostInput } from "./post";
 
-export { IuserInput };
+export { IUserInput, IPostInput };

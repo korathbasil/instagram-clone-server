@@ -12,6 +12,9 @@ class Post extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  user_id: number;
+
   @Column({
     type: "varchar",
     length: 300,
