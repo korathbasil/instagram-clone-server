@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { SimpleConsoleLogger } from "typeorm";
 
 import { postService } from "../services";
 
@@ -15,8 +16,13 @@ export default {
   },
 
   createPost: (req: Request, res: Response) => {
-    const { image, caption } = req.body;
-    const user_id = req.user.id;
+    // const { caption } = req.body;
+    // const user_id = req.user.id;
+
+    const caption = "dswdsd";
+    const user_id = 4;
+
+    const image = req.file!;
 
     postService
       .createPost(image, caption, user_id)
