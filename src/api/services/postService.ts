@@ -14,21 +14,24 @@ export default {
   },
 
   createPost: (
-    image: Express.Multer.File,
+    imageFile: Express.Multer.File,
     caption: string,
     user_id: number
   ) => {
     return new Promise(async (resolve, reject) => {
-      postHelper.uploadImage(image);
-      // const user = await User.findOne({ id: user_id });
-      // if (!user) return reject(new Error("Action not allowed"));
-      // try {
-      //   const post = Post.create({ image, caption, user });
-      //   await post.save();
-      //   return resolve(post);
-      // } catch (err) {
-      //   return reject(new Error("Cant add post"));
-      // }
+      const image = await postHelper.uploadImage(imageFile);
+
+      if (!image) return reject(new Error("Cannot upload image"));
+
+      const user = await User.findOne({ id: user_id });
+      if (!user) return reject(new Error("Action not allowed"));
+      try {
+        const post = Post.create({ image, caption, user });
+        await post.save();
+        return resolve(post);
+      } catch (err) {
+        return reject(new Error("Cant add post"));
+      }
     });
   },
 };

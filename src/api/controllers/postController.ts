@@ -16,16 +16,12 @@ export default {
   },
 
   createPost: (req: Request, res: Response) => {
-    // const { caption } = req.body;
-    // const user_id = req.user.id;
-
-    const caption = "dswdsd";
-    const user_id = 4;
-
-    const image = req.file!;
+    const { caption } = req.body;
+    const user_id = req.user.id;
+    const imageFile = req.file!;
 
     postService
-      .createPost(image, caption, user_id)
+      .createPost(imageFile, caption, user_id)
       .then((post) => res.status(201).json({ success: true, post }))
       .catch((err) =>
         res.status(409).json({ success: false, err: err.message })

@@ -8,4 +8,4 @@ dist
 yarn-error.log
 
 #Assets
-images
+public
