@@ -5,6 +5,8 @@ import { userRoute, postRoute } from "./api/routes";
 
 const app = express();
 
+app.use(express.static(__dirname + "/public"));
+
 app.use(express.json());
 app.use(multer().single("image"));
 
