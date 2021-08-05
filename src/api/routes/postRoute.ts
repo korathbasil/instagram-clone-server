@@ -8,6 +8,6 @@ const router = Router();
 
 router.get("/", isAuthenticated, postController.getPosts);
 
-router.post("/create", isAuthenticated, postController.createPost);
+router.post("/create", postController.createPost);
 
 export default router;

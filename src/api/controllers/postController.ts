@@ -18,13 +18,8 @@ export default {
     const { image, caption } = req.body;
     const user_id = req.user.id;
 
-    const postDetails = {
-      image,
-      caption,
-    };
-
     postService
-      .createPost(postDetails, user_id)
+      .createPost(image, caption, user_id)
       .then((post) => res.status(201).json({ success: true, post }))
       .catch((err) =>
         res.status(409).json({ success: false, err: err.message })
