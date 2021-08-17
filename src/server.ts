@@ -7,12 +7,14 @@ import ExpressApp from "./app";
 
 import connectToDatabase from "./config/db";
 
+import { PORT } from "./config/constants";
+
 const startServer = () => {
   connectToDatabase((err, _) => {
     if (err) console.error(err);
     else {
-      ExpressApp.listen(3000, () => {
-        console.info("Server started at PORT: " + 3000);
+      ExpressApp.listen(PORT, () => {
+        console.info("Server started at PORT: " + PORT);
       });
     }
   });
