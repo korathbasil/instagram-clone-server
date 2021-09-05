@@ -3,7 +3,7 @@ import cors from "cors";
 import multer from "multer";
 
 import { CLIENT_URL } from "./config/constants";
-import { userRoute, postRoute } from "./api/routes";
+import { userRoute, postRoute, fileRoute } from "./api/routes";
 
 const app = express();
 
@@ -19,5 +19,6 @@ app.get("/", (_, res: Response) => {
 
 app.use("/api/user", userRoute);
 app.use("/api/post", postRoute);
+app.use("/file", fileRoute);
 
 export default app;
