@@ -4,9 +4,7 @@ if (NODE_ENV === "dev" || NODE_ENV === "test") {
 }
 
 import ExpressApp from "./app";
-
 import connectToDatabase from "./config/db";
-
 import { PORT } from "./config/constants";
 
 const startServer = () => {
