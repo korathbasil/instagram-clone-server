@@ -1,11 +1,12 @@
 import { readFile } from "fs";
 
 export default {
-  getImageById: async (filenameWithPath: string) => {
+  getImageByPath: async (filenameWithPath: string) => {
     return new Promise((resolve, reject) => {
       return readFile(filenameWithPath, (err, data) => {
-        if (err) return new Error(err.message);
-        return data;
+        console.log(err?.message);
+        if (err) return reject(new Error(err.message));
+        return resolve(data);
       });
     });
   },

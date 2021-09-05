@@ -4,6 +4,6 @@ import { fileController } from "../controllers";
 
 const router = Router();
 
-router.get("/image/:id", fileController.getImage);
+router.get("/image/:filename", fileController.getImage);
 
 export default router;
