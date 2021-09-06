@@ -1,12 +1,13 @@
-import { readFile } from "fs";
+import { rejects } from "assert";
+import { fileHelper } from "../helpers";
 
 export default {
-  getImageByPath: async (filenameWithPath: string) => {
+  getImageByPath: (filename: string) => {
     return new Promise((resolve, reject) => {
-      return readFile(filenameWithPath, (err, data) => {
-        if (err) return reject(new Error(err.message));
-        return resolve(data);
-      });
+      fileHelper
+        .getImageByFilename(filename)
+        .then((image) => resolve(image))
+        .catch((err) => rejects(err));
     });
   },
 };
