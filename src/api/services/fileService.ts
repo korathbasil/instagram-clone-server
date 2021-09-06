@@ -1,4 +1,3 @@
-import { rejects } from "assert";
 import { fileHelper } from "../helpers";
 
 export default {
@@ -7,7 +6,7 @@ export default {
       fileHelper
         .getImageByFilename(filename)
         .then((image) => resolve(image))
-        .catch((err) => rejects(err));
+        .catch((err) => reject(err));
     });
   },
 };

@@ -6,12 +6,8 @@ export default {
   getImage: (req: Request, res: Response) => {
     const filename = req.params.filename;
 
-    const filenameWithPath =
-      "/home/korathbasil/Desktop/instagram-clone-server/public/images/" +
-      filename;
-
     fileService
-      .getImageByPath(filenameWithPath)
+      .getImageByPath(filename)
       .then((image) => {
         res.header("Content-Type", "image/png").send(image);
       })
