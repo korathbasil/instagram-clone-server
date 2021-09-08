@@ -25,12 +25,13 @@ export default {
 
       const user = await User.findOne({ id: user_id });
       if (!user) return reject(new Error("Action not allowed"));
+
       try {
         const post = Post.create({ image, caption, user });
         await post.save();
         return resolve(post);
       } catch (err) {
-        return reject(new Error("Cant add post"));
+        return reject(new Error("Can't add post"));
       }
     });
   },

@@ -1,11 +1,14 @@
 import sharp from "sharp";
 
-const resizeAndStoreImage = (image: Express.Multer.File, fileName: string) => {
-  return sharp(image.buffer)
+const resizeAndStoreImage = async (
+  image: Express.Multer.File,
+  fileName: string
+) => {
+  return await sharp(image.buffer)
     .resize({ width: 360 })
-    .toFile(`public/images/${fileName}`)
-    .then(() => `public/images/${fileName}`)
-    .catch(() => undefined);
+    .toFile(`storage/images/${fileName}`)
+    .then(() => true)
+    .catch(() => false);
 };
 
 export default {
@@ -15,10 +18,10 @@ export default {
     const fileName = new Date().toISOString() + "." + fileExtension; // Creating a new file name with new Date() and fileExtension
     // const imagePath = "/images/owners/" + fileName; // Setting the public path
 
-    const imageUrl = await resizeAndStoreImage(image, fileName);
+    const isImageUploadSuccess = await resizeAndStoreImage(image, fileName);
 
-    if (!imageUrl) return undefined;
+    if (!isImageUploadSuccess) return undefined;
 
-    return imageUrl;
+    return fileName;
   },
 };
