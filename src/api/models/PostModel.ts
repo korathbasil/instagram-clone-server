@@ -7,9 +7,11 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from "typeorm";
 
 import User from "./UserModel";
+import Like from "./LikeModel";
 
 @Entity("posts")
 class Post extends BaseEntity {
@@ -30,9 +32,14 @@ class Post extends BaseEntity {
   @Column()
   image: string;
 
+  // Likes
   @Column({ default: 0 })
   likes_count: number;
 
+  @OneToMany(() => Like, (like) => like.post)
+  likes: Like[];
+
+  // Comment
   @Column({ default: 0 })
   comments_count: number;
 
