@@ -4,10 +4,10 @@ import { fileService } from "../services";
 
 export default {
   getImage: (req: Request, res: Response) => {
-    const filename = req.params.filename;
+    const fileName = req.params.filename;
 
     fileService
-      .getImageByPath(filename)
+      .getImageByFileName(fileName)
       .then((image) => {
         res.header("Content-Type", "image/png").send(image);
       })

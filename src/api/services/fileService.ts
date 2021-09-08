@@ -1,10 +1,10 @@
 import { fileHelper } from "../helpers";
 
 export default {
-  getImageByPath: (filename: string) => {
+  getImageByFileName: (filename: string) => {
     return new Promise((resolve, reject) => {
       fileHelper
-        .getImageByFilename(filename)
+        .getImageByFileName(filename)
         .then((image) => resolve(image))
         .catch((err) => reject(err));
     });

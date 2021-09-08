@@ -1,11 +1,11 @@
 import { readFile } from "fs";
 
 export default {
-  getImageByFilename: async (filename: string) => {
+  getImageByFileName: async (fileName: string) => {
     return new Promise((resolve, reject) => {
-      const filenameWithPath = process.env.PWD + "/public/images/" + filename;
+      const fileNameWithPath = process.env.PWD + "/storage/images/" + fileName;
 
-      return readFile(filenameWithPath, (err, data) => {
+      return readFile(fileNameWithPath, (err, data) => {
         if (err) return reject(new Error(err.message));
 
         return resolve(data);
