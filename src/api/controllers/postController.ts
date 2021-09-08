@@ -26,4 +26,11 @@ export default {
         res.status(409).json({ success: false, err: err.message })
       );
   },
+
+  likePost: (req: Request, _: Response) => {
+    const userId = req.user.id;
+    const postId = parseInt(req.params.post_id);
+
+    postService.likePost(postId, userId);
+  },
 };

@@ -10,4 +10,6 @@ router.get("/", isAuthenticated, postController.getPosts);
 
 router.post("/create", isAuthenticated, postController.createPost);
 
+router.post("/like/:post_id", isAuthenticated, postController.likePost);
+
 export default router;

@@ -35,4 +35,14 @@ export default {
       }
     });
   },
+
+  likePost: (post_id: number, user_id: number) => {
+    return new Promise(async (resolve) => {
+      console.log(post_id, user_id);
+
+      const post = await Post.findOne({ id: post_id });
+      console.log(post);
+      resolve("Hello");
+    });
+  },
 };
