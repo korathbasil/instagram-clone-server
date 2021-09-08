@@ -1,4 +1,4 @@
-import { User, Post } from "../models";
+import { User, Post, Like } from "../models";
 
 import { postHelper } from "../helpers";
 
@@ -37,12 +37,25 @@ export default {
   },
 
   likePost: (post_id: number, user_id: number) => {
-    return new Promise(async (resolve) => {
-      console.log(post_id, user_id);
-
+    return new Promise(async (resolve, reject) => {
       const post = await Post.findOne({ id: post_id });
-      console.log(post);
-      resolve("Hello");
+
+      if (!post) return reject(new Error("Invalid post id"));
+
+      const like = await Like.findOne({ post, user: user_id });
+
+      if (like) {
+        await like.remove();
+        return resolve("UNLIKE");
+      }
+
+      const newLike = Like.create({ post, user: user_id });
+      try {
+        await newLike.save();
+        return resolve("LIKE");
+      } catch (err) {
+        return reject(new Error("Can't perform action"));
+      }
     });
   },
 };

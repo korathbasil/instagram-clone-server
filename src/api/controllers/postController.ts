@@ -27,10 +27,15 @@ export default {
       );
   },
 
-  likePost: (req: Request, _: Response) => {
+  likePost: (req: Request, res: Response) => {
     const userId = req.user.id;
     const postId = parseInt(req.params.post_id);
 
-    postService.likePost(postId, userId);
+    postService
+      .likePost(postId, userId)
+      .then((type) => res.status(201).json({ success: true, type }))
+      .catch((err) =>
+        res.status(400).json({ success: false, error: err.message })
+      );
   },
 };

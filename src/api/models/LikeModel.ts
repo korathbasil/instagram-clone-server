@@ -1,5 +1,6 @@
 import {
   Entity,
+  BaseEntity,
   Column,
   PrimaryGeneratedColumn,
   JoinColumn,
@@ -9,7 +10,7 @@ import {
 import Post from "./PostModel";
 
 @Entity("likes")
-class Like {
+class Like extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
