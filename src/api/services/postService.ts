@@ -29,7 +29,7 @@ export default {
       try {
         const post = Post.create({ image, caption, user });
         await post.save();
-        return resolve(post);
+        return resolve(post.dumpPost());
       } catch (err) {
         return reject(new Error("Can't add post"));
       }

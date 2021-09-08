@@ -41,6 +41,13 @@ class Post extends BaseEntity {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  dumpPost() {
+    return {
+      ...this,
+      user: this.user.id,
+    };
+  }
 }
 
 export default Post;
