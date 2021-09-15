@@ -1,7 +1,6 @@
 import {
   Entity,
   BaseEntity,
-  Column,
   PrimaryGeneratedColumn,
   JoinColumn,
   ManyToOne,
