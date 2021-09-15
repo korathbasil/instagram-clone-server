@@ -2,7 +2,7 @@ import { createConnection, Connection } from "typeorm";
 
 import { DB_PASSWORD } from "./constants";
 
-import { User, Post, Like } from "../api/models";
+import { User, Post, Like, Comment } from "../api/models";
 
 type dbConnectionCallback = (
   err: string | null,
@@ -18,7 +18,7 @@ const connectToDatabase = async (done: dbConnectionCallback) => {
     password: DB_PASSWORD,
     database: "instagram_clone_db",
     synchronize: true,
-    entities: [User, Post, Like],
+    entities: [User, Post, Like, Comment],
   });
 
   if (!connection) return done("Cannot connect to the database", undefined);
