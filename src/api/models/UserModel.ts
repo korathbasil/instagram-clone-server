@@ -12,6 +12,8 @@ import { hashPassword, comparePasswords } from "../helpers";
 import { jwtHelper } from "../helpers";
 
 import Post from "./PostModel";
+import Comment from "./CommentModel";
+import Like from './LikeModel';
 
 @Entity("users")
 class User extends BaseEntity {
@@ -84,6 +86,13 @@ class User extends BaseEntity {
   // Post
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
+
+  // Like
+  @OneToMany(() => Like, like => like.user)
+  likes: Like[];
+
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comments: Comment[];
 
   async encryptPassword() {
     const hashedPassword = await hashPassword(this.password);

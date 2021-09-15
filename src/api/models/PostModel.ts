@@ -12,6 +12,7 @@ import {
 
 import User from "./UserModel";
 import Like from "./LikeModel";
+import Comment from "./CommentModel";
 
 @Entity("posts")
 class Post extends BaseEntity {
@@ -42,6 +43,9 @@ class Post extends BaseEntity {
   // Comment
   @Column({ default: 0 })
   comments_count: number;
+
+  @OneToMany(() => Comment, (comment) => comment.post)
+  comments: Comment[];
 
   @CreateDateColumn()
   created_at: Date;
