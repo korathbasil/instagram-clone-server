@@ -28,8 +28,8 @@ export default {
   },
 
   likePost: (req: Request, res: Response) => {
-    const userId = req.user.id;
     const postId = parseInt(req.params.post_id);
+    const userId = req.user.id;
 
     postService
       .likePost(postId, userId)
@@ -38,4 +38,14 @@ export default {
         res.status(400).json({ success: false, error: err.message })
       );
   },
+
+  commentPost: (req: Request, res: Response) => {
+    const postId = parseInt(req.params.post_id);
+    const userId = req.user.id;
+    const commentBody = req.body.body;
+
+    postService.commentPost(postId, userId, commentBody)
+    .then((commentId) => res.status(201).json({success: true, comment_id: commentId}))
+    .catch((err) => res.status(400).json({success: false, message: err}))
+  }
 };

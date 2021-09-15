@@ -1,4 +1,4 @@
-import { User, Post, Like } from "../models";
+import { User, Post, Like, Comment } from "../models";
 
 import { postHelper } from "../helpers";
 
@@ -42,17 +42,48 @@ export default {
 
       if (!post) return reject(new Error("Invalid post id"));
 
-      const like = await Like.findOne({ post, user: user_id });
+      const user = await User.findOne({id: user_id});
+
+      if (!user) return reject(new Error("Invalid user id"));
+
+      const like = await Like.findOne({ post, user});
 
       if (like) {
         await like.remove();
         return resolve("UNLIKE");
       }
 
-      const newLike = Like.create({ post, user: user_id });
+      const newLike = Like.create({ post, user });
       try {
         await newLike.save();
         return resolve("LIKE");
+      } catch (err) {
+        return reject(new Error("Can't perform action"));
+      }
+    });
+  },
+  
+  commentPost: (post_id: number, user_id: number, body: string) => {
+    return new Promise(async (resolve, reject) => {
+      const post = await Post.findOne({ id: post_id });
+
+      if (!post) return reject(new Error("Invalid post id"));
+
+      const user = await User.findOne({id: user_id});
+
+      if (!user) return reject(new Error("Invalid user id"));
+
+      // const like = await Like.findOne({ post, user});
+
+      // if (like) {
+      //   await like.remove();
+      //   return resolve("UNLIKE");
+      // }
+
+      try {
+        const newComment = Comment.create({ body, post, user });
+        await newComment.save();
+        return resolve(newComment.id);
       } catch (err) {
         return reject(new Error("Can't perform action"));
       }
