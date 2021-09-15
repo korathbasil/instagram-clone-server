@@ -46,6 +46,6 @@ export default {
 
     postService.commentPost(postId, userId, commentBody)
     .then((commentId) => res.status(201).json({success: true, comment_id: commentId}))
-    .catch((err) => res.status(400).json({success: false, message: err}))
+    .catch((err) => res.status(400).json({success: false, message: err.message}))
   }
 };
