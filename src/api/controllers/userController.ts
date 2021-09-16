@@ -27,4 +27,11 @@ export default {
         res.status(403).json({ success: false, err: err.message })
       );
   },
+
+  followUser: (req: Request, res: Response) => {
+    const targetUserId = parseInt(req.params.user_id);
+    const userId = req.user.id;
+
+    userService.followUser(targetUserId, userId);
+  },
 };

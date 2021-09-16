@@ -6,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  ManyToMany,
 } from "typeorm";
 
 import { hashPassword, comparePasswords } from "../helpers";
@@ -13,7 +14,8 @@ import { jwtHelper } from "../helpers";
 
 import Post from "./PostModel";
 import Comment from "./CommentModel";
-import Like from './LikeModel';
+import Like from "./LikeModel";
+import Follow from "./FollowModel";
 
 @Entity("users")
 class User extends BaseEntity {
@@ -83,12 +85,20 @@ class User extends BaseEntity {
   @UpdateDateColumn()
   updated_at: Date;
 
+  // Following
+  @OneToMany(() => Follow, (follow) => follow.following)
+  following: Follow[];
+
+  // Folloers
+  @OneToMany(() => Follow, (follow) => follow.followed)
+  followers: Follow[];
+
   // Post
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
 
   // Like
-  @OneToMany(() => Like, like => like.user)
+  @OneToMany(() => Like, (like) => like.user)
   likes: Like[];
 
   @OneToMany(() => Comment, (comment) => comment.user)

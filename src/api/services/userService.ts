@@ -29,4 +29,10 @@ export default {
       resolve(user.dumpUserWithToken());
     });
   },
+
+  followUser: (targetUserId: number, user_id: number) => {
+    return new Promise(async (resolve, reject) => {
+      const user = await User.findOne({ id: targetUserId });
+    });
+  },
 };
