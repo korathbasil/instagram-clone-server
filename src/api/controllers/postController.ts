@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
 
-import { postService } from "../services";
-import { PostService } from "../services/postService";
+import { PostService } from "../services";
 
-export class PostController {
+export default class PostController {
   public static async getAllPosts(req: Request, res: Response) {
     const user_id = req.user.id;
 
@@ -26,33 +25,29 @@ export class PostController {
         res.status(409).json({ success: false, err: err.message })
       );
   }
-}
 
-export default {
-  likePost: (req: Request, res: Response) => {
+  public static likePost(req: Request, res: Response) {
     const postId = parseInt(req.params.post_id);
     const userId = req.user.id;
 
-    postService
-      .likePost(postId, userId)
+    PostService.likePost(postId, userId)
       .then((type) => res.status(201).json({ success: true, type }))
       .catch((err) =>
         res.status(400).json({ success: false, error: err.message })
       );
-  },
+  }
 
-  commentPost: (req: Request, res: Response) => {
+  public static commentPost(req: Request, res: Response) {
     const postId = parseInt(req.params.post_id);
     const userId = req.user.id;
     const commentBody = req.body.body;
 
-    postService
-      .commentPost(postId, userId, commentBody)
+    PostService.commentPost(postId, userId, commentBody)
       .then((commentId) =>
         res.status(201).json({ success: true, comment_id: commentId })
       )
       .catch((err) =>
         res.status(400).json({ success: false, message: err.message })
       );
-  },
-};
+  }
+}

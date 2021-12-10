@@ -1,17 +1,17 @@
 import { Router } from "express";
 
-import { postController } from "../controllers";
+import { PostController } from "../controllers";
 
 import { isAuthenticated } from "../middlewares";
 
 const router = Router();
 
-router.get("/", isAuthenticated, postController.getPosts);
+router.get("/", isAuthenticated, PostController.getAllPosts);
 
-router.post("/create", isAuthenticated, postController.createPost);
+router.post("/create", isAuthenticated, PostController.createPost);
 
-router.post("/like/:post_id", isAuthenticated, postController.likePost);
+router.post("/like/:post_id", isAuthenticated, PostController.likePost);
 
-router.post("/comment/:post_id", isAuthenticated, postController.commentPost)
+router.post("/comment/:post_id", isAuthenticated, PostController.commentPost);
 
 export default router;
