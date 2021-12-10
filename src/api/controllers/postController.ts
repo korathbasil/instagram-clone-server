@@ -1,32 +1,34 @@
 import { Request, Response } from "express";
 
 import { postService } from "../services";
+import { PostService } from "../services/postService";
 
-export default {
-  getPosts: (req: Request, res: Response) => {
+export class PostController {
+  public static async getAllPosts(req: Request, res: Response) {
     const user_id = req.user.id;
 
-    postService
-      .getPosts(user_id)
-      .then((posts) => res.status(200).json({ success: true, posts }))
-      .catch((err) =>
-        res.status(403).json({ success: false, err: err.message })
-      );
-  },
+    const posts = await PostService.getAllPosts(user_id);
 
-  createPost: (req: Request, res: Response) => {
+    if (!posts)
+      return res.status(403).json({ success: false, err: "Cannot get posts" });
+
+    return res.status(200).json({ success: true, posts });
+  }
+
+  public static createPost(req: Request, res: Response) {
     const { caption } = req.body;
     const user_id = req.user.id;
     const imageFile = req.file!;
 
-    postService
-      .createPost(imageFile, caption, user_id)
+    PostService.createPost(imageFile, caption, user_id)
       .then((post) => res.status(201).json({ success: true, post }))
       .catch((err) =>
         res.status(409).json({ success: false, err: err.message })
       );
-  },
+  }
+}
 
+export default {
   likePost: (req: Request, res: Response) => {
     const postId = parseInt(req.params.post_id);
     const userId = req.user.id;
@@ -44,8 +46,13 @@ export default {
     const userId = req.user.id;
     const commentBody = req.body.body;
 
-    postService.commentPost(postId, userId, commentBody)
-    .then((commentId) => res.status(201).json({success: true, comment_id: commentId}))
-    .catch((err) => res.status(400).json({success: false, message: err.message}))
-  }
+    postService
+      .commentPost(postId, userId, commentBody)
+      .then((commentId) =>
+        res.status(201).json({ success: true, comment_id: commentId })
+      )
+      .catch((err) =>
+        res.status(400).json({ success: false, message: err.message })
+      );
+  },
 };
