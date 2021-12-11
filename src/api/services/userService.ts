@@ -1,4 +1,4 @@
-import { User } from "../models";
+import { User, Follow } from "../models";
 
 import { IUserInput } from "../interfaces";
 
@@ -33,6 +33,20 @@ export default {
   followUser: (targetUserId: number, user_id: number) => {
     return new Promise(async (resolve, reject) => {
       const user = await User.findOne({ id: targetUserId });
+    });
+  },
+
+  sendFollowRequest: (targetUserId: number, user_id: number) => {
+    return new Promise<number>(async (resolve, reject) => {
+      const user = await User.findOne({ id: user_id });
+      if (!user) return reject("User not found");
+
+      const targetUser = await User.findOne({ id: targetUserId });
+      if (!targetUser) return reject("User not found");
+
+      const newFollowRequest = Follow.create({ user, targetUser });
+      await newFollowRequest.save();
+      return resolve(newFollowRequest.id);
     });
   },
 };

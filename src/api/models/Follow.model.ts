@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   JoinColumn,
   ManyToOne,
+  Column,
 } from "typeorm";
 
 import User from "./UserModel";
@@ -19,7 +20,10 @@ class Follow extends BaseEntity {
 
   @ManyToOne(() => User, (user) => user.followers)
   @JoinColumn({ name: "target_user_id" })
-  targetUSer: User;
+  targetUser: User;
+
+  @Column({ default: false })
+  accepted: boolean;
 }
 
 export default Follow;
