@@ -1,5 +1,5 @@
 import userService from "./userService";
-import postService from "./postService";
+import PostService from "./postService";
 import fileService from "./fileService";
 
-export { userService, postService, fileService };
+export { userService, PostService, fileService };

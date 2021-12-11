@@ -1,5 +1,5 @@
 import userController from "./userController";
-import postController from "./postController";
+import PostController from "./postController";
 import fileController from "./fileController";
 
-export { userController, postController, fileController };
+export { userController, PostController, fileController };
