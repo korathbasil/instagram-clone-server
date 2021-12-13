@@ -30,12 +30,6 @@ export default {
     });
   },
 
-  followUser: (targetUserId: number, user_id: number) => {
-    return new Promise(async (resolve, reject) => {
-      const user = await User.findOne({ id: targetUserId });
-    });
-  },
-
   sendFollowRequest: (targetUserId: number, user_id: number) => {
     return new Promise<number>(async (resolve, reject) => {
       const user = await User.findOne({ id: user_id });
@@ -47,6 +41,18 @@ export default {
       const newFollowRequest = Follow.create({ user, targetUser });
       await newFollowRequest.save();
       return resolve(newFollowRequest.id);
+    });
+  },
+
+  acceptFollowRequest: (reqId: number) => {
+    return new Promise(async (resolve, reject) => {
+      const followReq = await Follow.findOne({ id: reqId });
+      if (!followReq) return reject("can't perform action");
+
+      followReq.accepted = true;
+
+      await followReq.save();
+      return resolve(true);
     });
   },
 };
