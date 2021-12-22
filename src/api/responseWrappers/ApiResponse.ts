@@ -52,6 +52,7 @@ export class AuthFailureResponse extends ApiResponse {
 }
 
 export class NotFoundResponse extends ApiResponse {
+  // @ts-ignore
   private url: string | undefined;
 
   constructor(message = "Not Found") {
@@ -93,9 +94,9 @@ export class FailureMsgResponse extends ApiResponse {
     super(StatusCode.FAILURE, ResponseStatus.SUCCESS, message);
   }
 }
-
+//  private _: T/
 export class SuccessResponse<T> extends ApiResponse {
-  constructor(message: string, private data: T) {
+  constructor(message: string) {
     super(StatusCode.SUCCESS, ResponseStatus.SUCCESS, message);
   }
 
@@ -123,9 +124,9 @@ export class AccessTokenErrorResponse extends ApiResponse {
 
 export class TokenRefreshResponse extends ApiResponse {
   constructor(
-    message: string,
-    private accessToken: string,
-    private refreshToken: string
+    message: string
+    // private accessToken: string,
+    // private refreshToken: string
   ) {
     super(StatusCode.SUCCESS, ResponseStatus.SUCCESS, message);
   }

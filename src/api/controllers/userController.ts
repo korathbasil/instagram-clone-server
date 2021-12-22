@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { userService } from "../services";
+import { userService, FollowRequestService } from "../services";
 
 export default {
   userSignup: (req: Request, res: Response) => {
@@ -28,10 +28,15 @@ export default {
       );
   },
 
-  followUser: (req: Request, res: Response) => {
-    const targetUserId = parseInt(req.params.user_id);
+  sendFollowRequest: async (req: Request, res: Response) => {
+    const targetUserId = parseInt(req.body.userId);
     const userId = req.user.id;
 
-    userService.followUser(targetUserId, userId);
+    const followReqId = await FollowRequestService.sendFollowRequest(
+      targetUserId,
+      userId
+    );
+
+    res.send({ id: followReqId });
   },
 };

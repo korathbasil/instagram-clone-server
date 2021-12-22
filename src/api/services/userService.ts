@@ -12,6 +12,7 @@ export default {
 
         return resolve(user.dumpUserWithToken());
       } catch (err) {
+        console.error(err);
         return reject(new Error("Cannot perform action"));
       }
     });
@@ -41,18 +42,6 @@ export default {
       const newFollowRequest = Follow.create({ user, targetUser });
       await newFollowRequest.save();
       return resolve(newFollowRequest.id);
-    });
-  },
-
-  acceptFollowRequest: (reqId: number) => {
-    return new Promise(async (resolve, reject) => {
-      const followReq = await Follow.findOne({ id: reqId });
-      if (!followReq) return reject("can't perform action");
-
-      followReq.accepted = true;
-
-      await followReq.save();
-      return resolve(true);
     });
   },
 };
