@@ -16,11 +16,11 @@ const connectToDatabase = async (done: dbConnectionCallback) => {
     port: 5432,
     username: "postgres",
     password: DB_PASSWORD,
-    database: "instagram_clone_db",
+    database: `instagram_clone_db_${process.env.NODE_ENV}`,
     synchronize: true,
     entities: [User, Post, Like, Comment, Follow],
   });
-
+  console.log(process.env.NODE_ENV);
   if (!connection) return done("Cannot connect to the database", undefined);
   done(null, connection);
 };

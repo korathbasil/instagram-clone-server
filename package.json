@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "mocha -r ts-node/register 'test/**/*.spec.ts'",
+    "test": "NODE_ENV='test' mocha --file ./src/test/setup.ts -r ts-node/register 'src/**/*.spec.ts' --watch",
     "watch": "tsc --watch",
     "dev": "nodemon dist/server.js",
     "devStart": "ts-node",
