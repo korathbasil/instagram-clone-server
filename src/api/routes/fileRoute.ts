@@ -6,4 +6,4 @@ const router = Router();
 
 router.get("/image/:filename", fileController.getImage);
 
-export default router;
+export { router as fileRouter };

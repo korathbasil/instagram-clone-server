@@ -14,4 +14,4 @@ router.post("/like/:post_id", isAuthenticated, PostController.likePost);
 
 router.post("/comment/:post_id", isAuthenticated, PostController.commentPost);
 
-export default router;
+export { router as postRouter };

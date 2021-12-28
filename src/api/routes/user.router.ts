@@ -13,4 +13,4 @@ router.post("/follow-req", isAuthenticated, userController.sendFollowRequest);
 
 router.put("/follow-req", isAuthenticated, userController.acceptFollowRequest);
 
-export default router;
+export { router as userRouter };
