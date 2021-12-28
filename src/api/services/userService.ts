@@ -4,7 +4,7 @@ import { IUserInput } from "../interfaces";
 
 export default {
   createUser: (userDetails: IUserInput) => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise<User>(async (resolve, reject) => {
       try {
         const user = User.create(userDetails);
         await user.encryptPassword();

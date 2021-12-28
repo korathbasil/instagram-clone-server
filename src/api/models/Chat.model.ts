@@ -3,8 +3,6 @@ import {
   BaseEntity,
   PrimaryGeneratedColumn,
   OneToMany,
-  ManyToOne,
-  JoinColumn,
   Column,
 } from "typeorm";
 import { UserChat } from ".";
@@ -27,7 +25,6 @@ export class Chat extends BaseEntity {
   @OneToMany(() => UserChat, (uc) => uc.user)
   userConnection: User[]; // Promise
 
-  @ManyToOne(() => Message, (message) => message.chat)
-  @JoinColumn({ name: "message_id" })
+  @OneToMany(() => Message, (message) => message.chat)
   messages: Message[];
 }

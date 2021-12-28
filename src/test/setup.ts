@@ -9,13 +9,12 @@ before(async () => {
 });
 
 beforeEach(async () => {
-  const connection = getConnection();
-  await connection.query("START TRANSACTION");
+  // const connection = getConnection();
+  // await connection.query("START TRANSACTION");
 });
 
 afterEach(async () => {
-  const connection = getConnection();
-  await connection.query("ROLBACK");
+  // await connection.dropDatabase();
 });
 
 after(async () => {

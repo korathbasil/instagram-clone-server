@@ -62,7 +62,7 @@ class User extends BaseEntity {
     type: "varchar",
     length: 255,
   })
-  password: string;
+  password?: string;
 
   @Column({
     type: "varchar",
@@ -125,12 +125,12 @@ class User extends BaseEntity {
   comments: Comment[];
 
   async encryptPassword() {
-    const hashedPassword = await hashPassword(this.password);
+    const hashedPassword = await hashPassword(this.password!);
     this.password = hashedPassword;
   }
 
   async isPasswordCorrect(password: string) {
-    return comparePasswords(password, this.password);
+    return comparePasswords(password, this.password!);
   }
 
   dumpUser() {
