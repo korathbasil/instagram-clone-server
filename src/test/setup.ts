@@ -8,6 +8,16 @@ before(async () => {
   });
 });
 
+beforeEach(async () => {
+  const connection = getConnection();
+  await connection.query("START TRANSACTION");
+});
+
+afterEach(async () => {
+  const connection = getConnection();
+  await connection.query("ROLBACK");
+});
+
 after(async () => {
   const connection = getConnection();
   await connection.close();
