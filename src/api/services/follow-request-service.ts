@@ -15,9 +15,12 @@ export class FollowRequestService {
     });
   }
 
-  public static async acceptFollowRequest(reqId: number) {
+  public static async acceptFollowRequest(reqId: number, user_id: number) {
     return new Promise(async (resolve, reject) => {
       const followReq = await Follow.findOne({ id: reqId });
+      console.log(followReq?.user);
+      if (followReq?.targetUser.id !== user_id)
+        return reject("can't perform action");
       if (!followReq) return reject("can't perform action");
 
       followReq.accepted = true;

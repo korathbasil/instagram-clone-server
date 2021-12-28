@@ -6,8 +6,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
-  ManyToMany,
-  JoinTable,
 } from "typeorm";
 
 import { hashPassword, comparePasswords } from "../helpers";
@@ -93,11 +91,10 @@ class User extends BaseEntity {
   // @OneToMany(() => Follow, (follow) => follow.followed)
   // followers: Follow[];
 
-  @ManyToMany(() => User, (user) => user.following)
-  @JoinTable()
+  @OneToMany(() => User, (user) => user.following)
   followers: User[];
 
-  @ManyToMany(() => User, (user) => user.followers)
+  @OneToMany(() => User, (user) => user.followers)
   following: User[];
 
   // Post

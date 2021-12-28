@@ -39,4 +39,13 @@ export default {
 
     res.send({ id: followReqId });
   },
+
+  acceptFollowRequest(req: Request, res: Response) {
+    const reqId = req.body.reqId;
+    const userId = req.user.id;
+
+    FollowRequestService.acceptFollowRequest(reqId, userId)
+      .then(() => res.send({ message: "Request Accepted" }))
+      .catch((e) => res.send(e));
+  },
 };
