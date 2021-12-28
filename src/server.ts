@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-import ExpressApp from "./app";
+import { ExpressApp } from "./app";
 import connectToDatabase from "./config/db";
 import { PORT } from "./config/constants";
 

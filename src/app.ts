@@ -12,10 +12,6 @@ app.use(cors({ origin: CLIENT_URL }));
 app.use(express.json());
 app.use(multer().single("image"));
 
-app.get("/", (_, res: Response) => {
-  res.status(200).json({ success: true, message: "Hello World" });
-});
-
 app.use("/api/v1", appRouter);
 
-export default app;
+export { app as ExpressApp };
