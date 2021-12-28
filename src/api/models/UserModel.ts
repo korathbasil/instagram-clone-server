@@ -6,6 +6,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  ManyToOne,
+  JoinColumn,
 } from "typeorm";
 
 import { hashPassword, comparePasswords } from "../helpers";
@@ -14,6 +16,8 @@ import { jwtHelper } from "../helpers";
 import Post from "./PostModel";
 import Comment from "./CommentModel";
 import Like from "./LikeModel";
+import { Chat } from "./Chat.model";
+import { Message } from "./Message.model";
 
 @Entity("users")
 class User extends BaseEntity {
@@ -90,6 +94,18 @@ class User extends BaseEntity {
   // // Folloers
   // @OneToMany(() => Follow, (follow) => follow.followed)
   // followers: Follow[];
+
+  // Chats
+
+  @ManyToOne(() => Chat, (chat) => chat.parties)
+  @JoinColumn({ name: "chat_id" })
+  chats: Chat[];
+
+  @ManyToOne(() => Message, (message) => message.sender)
+  @JoinColumn({ name: "message_id" })
+  messagesSent: Message[];
+
+  // End Chat
 
   @OneToMany(() => User, (user) => user.following)
   followers: User[];
