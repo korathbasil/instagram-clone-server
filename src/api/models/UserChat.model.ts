@@ -17,11 +17,11 @@ export class UserChat extends BaseEntity {
   @PrimaryColumn()
   user_id: number;
 
-  @ManyToOne(() => Chat, (chat) => chat.parties)
+  @ManyToOne(() => Chat, (chat) => chat.userConnection)
   @JoinColumn({ name: "chat_id" })
   chat: User;
 
-  @ManyToOne(() => User, (user) => user.chats)
+  @ManyToOne(() => User, (user) => user.chatConnection)
   @JoinColumn({ name: "user_id" })
   user: User;
 }

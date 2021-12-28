@@ -5,6 +5,7 @@ import {
   OneToMany,
   ManyToOne,
   JoinColumn,
+  Column,
 } from "typeorm";
 import { UserChat } from ".";
 import { Message } from "./Message.model";
@@ -16,10 +17,15 @@ export class Chat extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({
+    nullable: true,
+    type: "varchar",
+    length: 50,
+  })
   name: string;
 
   @OneToMany(() => UserChat, (uc) => uc.user)
-  parties: User[];
+  userConnection: User[]; // Promise
 
   @ManyToOne(() => Message, (message) => message.chat)
   @JoinColumn({ name: "message_id" })

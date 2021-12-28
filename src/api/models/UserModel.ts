@@ -98,8 +98,8 @@ class User extends BaseEntity {
 
   // Chats
 
-  @OneToMany(() => UserChat, (uc) => uc.chat)
-  chats: Chat[]; // Promise
+  @OneToMany(() => UserChat, (uc) => uc.user)
+  chatConnection: Chat[]; // Promise
 
   @ManyToOne(() => Message, (message) => message.sender)
   @JoinColumn({ name: "message_id" })
