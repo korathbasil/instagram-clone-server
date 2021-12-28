@@ -9,10 +9,10 @@
   "scripts": {
     "test": "NODE_ENV='test' mocha --file ./src/test/setup.ts -r ts-node/register 'src/**/*.spec.ts' --watch",
     "watch": "tsc --watch",
-    "dev": "nodemon dist/server.js",
-    "devStart": "ts-node",
+    "dev": "NODE_ENV='test' nodemon dist/server.js",
+    "devStart": "NODE_ENV='test' ts-node",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "NODE_EMV='prod' node dist/server.js"
   },
   "dependencies": {
     "@types/sharp": "^0.28.5",
