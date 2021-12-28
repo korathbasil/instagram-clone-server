@@ -18,6 +18,7 @@ import Comment from "./CommentModel";
 import Like from "./LikeModel";
 import { Chat } from "./Chat.model";
 import { Message } from "./Message.model";
+import { UserChat } from ".";
 
 @Entity("users")
 class User extends BaseEntity {
@@ -97,9 +98,8 @@ class User extends BaseEntity {
 
   // Chats
 
-  @ManyToOne(() => Chat, (chat) => chat.parties)
-  @JoinColumn({ name: "chat_id" })
-  chats: Chat[];
+  @OneToMany(() => UserChat, (uc) => uc.chat)
+  chats: Chat[]; // Promise
 
   @ManyToOne(() => Message, (message) => message.sender)
   @JoinColumn({ name: "message_id" })

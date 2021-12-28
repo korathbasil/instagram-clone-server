@@ -6,6 +6,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from "typeorm";
+import { UserChat } from ".";
 import { Message } from "./Message.model";
 
 import User from "./UserModel";
@@ -17,7 +18,7 @@ export class Chat extends BaseEntity {
 
   name: string;
 
-  @OneToMany(() => User, (user) => user.chats)
+  @OneToMany(() => UserChat, (uc) => uc.user)
   parties: User[];
 
   @ManyToOne(() => Message, (message) => message.chat)
