@@ -24,10 +24,10 @@ describe("Chat Service", () => {
       const user2 = await User.create(user2details);
       await user2.save();
 
-      const chat = await ChatService.createChat();
+      const chat = await ChatService.createChat(user1.id);
       console.log(chat);
 
-      expect(typeof chat).equal("string");
+      expect(typeof chat).equal("object");
     });
   });
 });

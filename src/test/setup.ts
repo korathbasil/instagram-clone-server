@@ -9,13 +9,17 @@ before(async () => {
 });
 
 beforeEach(async () => {
-  // const connection = getConnection();
-  // await connection.query("START TRANSACTION");
+  const connection = getConnection();
+
+  const entities = connection.entityMetadatas;
+
+  for (const entity of entities) {
+    const repository = connection.getRepository(entity.name); // Get repository
+    await repository.clear(); // Clear each entity table's content
+  }
 });
 
-afterEach(async () => {
-  // await connection.dropDatabase();
-});
+afterEach(async () => {});
 
 after(async () => {
   const connection = getConnection();
